@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from '../../../../components/input'
+import useStudent from '../../../../hooks/useStudent'
 
 const formInitial = {
     student_name: '',
@@ -15,6 +16,7 @@ const formInitial = {
 
 const NewStudent = () => {
 
+    const { addNewStudent } = useStudent()
     const [inputValues,setInputValues] = React.useState( formInitial );
 
     const handleChange = ( event ) => {
@@ -23,13 +25,22 @@ const NewStudent = () => {
     };
 
 
+    const handleCreateNewStudent = async ( event ) => {
+        event.preventDefault()
+        await addNewStudent( inputValues )
+        setInputValues( formInitial )
+    }
+
+
+
+
     return (
         <div className='w-full h-full flex flex-col p2 gap-2   '>
 
             <header className='w-full flex h-14 justify-start items-start p-3 shrink-0 flex-col '>
                 <h1 className='text-2xl font-Saira font-medium'>Novo Aluno</h1>
             </header>
-            <form action="">
+            <form onSubmit={handleCreateNewStudent}>
 
 
                 <section className=' w-full px-3 flex gap-3 '>
