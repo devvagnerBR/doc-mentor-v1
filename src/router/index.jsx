@@ -14,7 +14,7 @@ const RouterConfig = () => {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Homepage />} />
-                <Route path='/admin' element={<Dashboard />} />
+                <Route path='/dashboard/*' element={<Dashboard />} />
             </Routes>
         </BrowserRouter>
     )

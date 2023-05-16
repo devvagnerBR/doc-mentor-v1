@@ -1,8 +1,35 @@
 import React from 'react'
+import SideBar from '../../components/sidebar'
+import Header from '../../components/header'
+import { Route,Routes } from 'react-router-dom'
+import MyHome from './myHome'
+import MyStudents from './myStudents'
+import MyData from './myData'
+import MySchools from './mySchools'
+import StudentDetails from './myStudents/studentDetails'
 
 const Dashboard = () => {
+
+
+
     return (
-        <div>Dashboard</div>
+
+        <div className='bg-gray-50 w-100dvw h-100dvh flex'>
+            <SideBar />
+
+            <section className='flex flex-col w-full'>
+                <Header />
+                <Routes>
+                    <Route path='/' element={<MyHome />} />
+                    <Route path='meus-alunos' exact element={<MyStudents />} />
+                    <Route path='meus-dados' element={<MyData />} />
+                    <Route path='minhas-escolas' element={<MySchools />} />
+                    <Route path='meus-alunos/:id' element={<StudentDetails />} />
+                </Routes>
+            </section>
+
+        </div>
+        //nested router:  "/" sendo a meus-alunos
     )
 }
 

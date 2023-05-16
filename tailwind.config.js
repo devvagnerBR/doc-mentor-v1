@@ -24,7 +24,9 @@ export default {
       },fontFamily: {
 
         FiraCode: ['Fira Code'],
-        Poppins: ['Poppins']
+        Poppins: ['Poppins'],
+        Alata: ['Alata'],
+        Saira: ['Saira'],
       },
 
       colors: {
