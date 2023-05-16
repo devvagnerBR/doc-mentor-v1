@@ -2,6 +2,7 @@ import React from 'react'
 import { Link,Route,Router,Routes } from 'react-router-dom'
 import StudentDetails from './studentDetails'
 import transformInSlug from './../../../util/transformInSlug';
+import { Plus } from '@phosphor-icons/react'
 
 const MyStudents = () => {
 
@@ -14,8 +15,12 @@ const MyStudents = () => {
     return (
         <div className='w-full h-full flex flex-col'>
 
-            <header className='w-full flex h-14 justify-start items-end p-3 shrink-0'>
+            <header className='w-full flex h-14 justify-start  items-center p-3 gap-3 shrink-0'>
                 <h1 className='text-2xl font-Saira font-medium'>Meus Alunos</h1>
+                <Link to='novo-aluno' className='p-1 flex items-center gap-2 justify-center cursor-pointer text-neutral-700 text-sm px-2 rounded-sm bg-amber-400'>
+                    <Plus />
+                    Novo aluno
+                </Link>
             </header>
 
             <main className='w-full h-full flex justify-start items-start gap-8 px-4'>
