@@ -8,10 +8,10 @@ import { v4 as IdGenerator } from 'uuid'
 const useStudent = () => {
 
 
-  const addNewStudent = async ( body ) => {
+  const addNewStudent = async ( body,teacherId ) => {
 
     if ( Object.keys( body ).length === 0 ) return false;
-    await set( ref( db,`teachers/uk7Ta0bBlPPH1E2AO7FFxRb66un2/students/${IdGenerator()}` ),body )
+    await set( ref( db,`teachers/${teacherId}/students/${IdGenerator()}` ),body )
       .then( console.log( 'aluno cadastrado com sucesso' ) )
 
   }

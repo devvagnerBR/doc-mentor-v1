@@ -1,6 +1,8 @@
 import React from 'react'
 import Input from '../../../../components/input'
 import useStudent from '../../../../hooks/useStudent'
+import { AuthContext } from '../../../../context/authContext'
+import { useNavigate } from 'react-router-dom'
 
 const formInitial = {
     student_name: '',
@@ -16,6 +18,9 @@ const formInitial = {
 
 const NewStudent = () => {
 
+    const navigate = useNavigate()
+
+    const teacher = React.useContext( AuthContext )
     const { addNewStudent } = useStudent()
     const [inputValues,setInputValues] = React.useState( formInitial );
 
@@ -27,11 +32,10 @@ const NewStudent = () => {
 
     const handleCreateNewStudent = async ( event ) => {
         event.preventDefault()
-        await addNewStudent( inputValues )
+        await addNewStudent( { ...inputValues,status: 'ativo' },teacher.id )
         setInputValues( formInitial )
+        navigate('/dashboard/meus-alunos')
     }
-
-
 
 
     return (
@@ -41,7 +45,6 @@ const NewStudent = () => {
                 <h1 className='text-2xl font-Saira font-medium'>Novo Aluno</h1>
             </header>
             <form onSubmit={handleCreateNewStudent}>
-
 
                 <section className=' w-full px-3 flex gap-3 '>
                     <Input
