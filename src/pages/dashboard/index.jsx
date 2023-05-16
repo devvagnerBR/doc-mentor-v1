@@ -7,6 +7,7 @@ import MyStudents from './myStudents'
 import MyData from './myData'
 import MySchools from './mySchools'
 import StudentDetails from './myStudents/studentDetails'
+import StudentReport from './myStudents/studentReport/index';
 
 const Dashboard = () => {
 
@@ -24,7 +25,8 @@ const Dashboard = () => {
                     <Route path='meus-alunos' exact element={<MyStudents />} />
                     <Route path='meus-dados' element={<MyData />} />
                     <Route path='minhas-escolas' element={<MySchools />} />
-                    <Route path='meus-alunos/:id' element={<StudentDetails />} />
+                    <Route path='meus-alunos/:student' element={<StudentDetails />} />
+                    <Route path='meus-alunos/:student/:report' element={<StudentReport />} />
                 </Routes>
             </section>
 

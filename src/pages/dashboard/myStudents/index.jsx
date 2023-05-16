@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link,Route,Router,Routes } from 'react-router-dom'
 import StudentDetails from './studentDetails'
+import transformInSlug from './../../../util/transformInSlug';
 
 const MyStudents = () => {
 
@@ -27,7 +28,7 @@ const MyStudents = () => {
                 <div className=''>
                     <p className='text-neutral-300 font-light '>Nome</p>
                     {students.map( ( student,index ) => {
-                        return <Link  to={`wagner`} className='underline cursor-pointer flex' key={student.id}>{student.nome}</Link>
+                        return <Link to={transformInSlug( student.nome )} className='underline cursor-pointer flex' key={student.id}>{student.nome}</Link>
                     } )}
                 </div>
                 <div className=''>

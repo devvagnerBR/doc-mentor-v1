@@ -1,6 +1,21 @@
 import React from 'react'
 import { PencilSimpleLine,Trash } from '@phosphor-icons/react'
-const student = { id: 1,nome: 'Wagner Luiz da Silva Guimarães',idade: 28,escola: { nome: 'Maria Teixeira de Paula',turma: 'Pré-1B',turno: 'Manhã',ano: 2023 },deficiencia: 'TDAH',dias_de_atendimento: 'quinta',ultimo_relatorio: '09/05/2023',status: 'ativo',relatorios: [{ id: 1,titulo: '1 Bimestre',data: '15/04/2023' },{ id: 2,titulo: '2 Bimestre',data: '22/3/2023' }] }
+import { Link } from 'react-router-dom'
+import transformInSlug from '../../../../util/transformInSlug'
+
+const student = {
+    id: 1,nome: 'Wagner Luiz da Silva Guimarães',idade: 28,escola: { nome: 'Maria Teixeira de Paula',turma: 'Pré-1B',turno: 'Manhã',ano: 2023 },deficiencia: 'TDAH',dias_de_atendimento: 'quinta',ultimo_relatorio: '09/05/2023',status: 'ativo',relatorios: [{
+        id: 1,titulo: '1 Bimestre',content: `Gostaria de compartilhar com você o relatório de acompanhamento do desenvolvimento da criança especial, [Nome da Criança], durante o período de observação. Durante esse tempo, tive a oportunidade de interagir com a criança em diversas atividades e ambientes, e gostaria de fornecer uma visão geral do seu progresso.
+
+Desenvolvimento Físico:
+Durante as sessões de terapia e atividades motoras, observei melhorias significativas no desenvolvimento físico de [Nome da Criança]. A criança tem mostrado um aumento da força muscular e coordenação motora, conseguindo executar tarefas como segurar objetos, engatinhar e até mesmo dar alguns passos com apoio. Esses avanços são encorajadores e demonstram um bom progresso no desenvolvimento físico.
+
+Desenvolvimento Cognitivo:
+No aspecto cognitivo, [Nome da Criança] tem demonstrado um interesse crescente em explorar o ambiente ao seu redor. Durante as atividades de estimulação cognitiva, notei que a criança está desenvolvendo habilidades de resolução de problemas e compreensão de conceitos básicos, como cores e formas. Além disso, [Nome da Criança] está começando a mostrar uma melhor capacidade de concentração e atenção durante as atividades.
+
+Desenvolvimento Social e Emocional:
+A interação social tem sido uma área de foco durante o período de observação. [Nome da Criança] está progredindo positivamente em relação à interação com os colegas e demonstra interesse em se comunicar e compartilhar experiências com os outros. Embora às vezes a criança possa apresentar desafios na expressão das emoções, temos trabalhado para fortalecer as habilidades de comunicação e expressão emocional de forma adequada.`,data: '15/04/2023' },{ id: 2,titulo: '2 Bimestre',data: '22/3/2023' }]
+}
 
 
 
@@ -39,15 +54,15 @@ const StudentDetails = () => {
                     <div>
                         <p className='text-neutral-300 font-light '>Título</p>
                         {student.relatorios.map( ( relatorio,index ) => {
-                            return <p className='underline cursor-pointer' key={relatorio.id}>{relatorio.titulo} </p>
+                            return <Link to={transformInSlug( relatorio.titulo )} className='underline cursor-pointer flex' key={relatorio.id}>{relatorio.titulo} </Link>
                         } )}
                     </div>
                     <div>
                         <p className='text-neutral-300 font-light '>Data</p>
                         {student.relatorios.map( ( relatorio,index ) => {
-                            return <div key={relatorio.id}  className='flex items-center gap-2'>
+                            return <div key={relatorio.id} className='flex items-center gap-2'>
                                 <p >{relatorio.data} </p>
-                                <PencilSimpleLine className='cursor-pointer'/>
+                                <PencilSimpleLine className='cursor-pointer' />
                                 <Trash className='cursor-pointer' />
                             </div>
                         } )}
