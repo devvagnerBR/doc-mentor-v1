@@ -1,17 +1,36 @@
 import React from 'react'
 import { PencilSimpleLine,Trash,FilePlus } from '@phosphor-icons/react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate,useParams } from 'react-router-dom'
 import transformInSlug from '../../../../util/transformInSlug'
 import { StudentContext } from '../../../../context/studentsContext'
 import moment from 'moment';
 import 'moment/dist/locale/pt-br';
+import useStudent from '../../../../hooks/useStudent'
+import useGetStudents from '../../../../hooks/useGetStudents'
+import useGetReports from '../../../../hooks/useGetReports'
 
 const StudentDetails = () => {
 
+    const navigate = useNavigate()
+    const { deleteReport } = useStudent()
     const { student } = React.useContext( StudentContext )
     const [studentDetails,setStudentDetails] = React.useState( student || JSON.parse( window.localStorage.getItem( 'student' ) ) )
-    const reports = studentDetails.reports
+    const { reports } = useGetReports()
 
+    const handleShowReport = async ( report ) => {
+
+        window.localStorage.setItem( 'currentReport',JSON.stringify( report ) )
+        navigate( transformInSlug( report.title ) )
+
+    }
+
+    const handleDeleteReport = async ( report ) => {
+        if ( window.confirm( 'Deseja mesmo excluir esse relatório?' ) ) {
+            await deleteReport( report.id,studentDetails.id )
+        }
+    }
+
+    console.log(reports);
     return (
         <div className='w-full h-full flex flex-col'>
 
@@ -41,7 +60,7 @@ const StudentDetails = () => {
                 </header>
 
                 <main className='w-full h-full flex justify-start items-start gap-8 px-4'>
-                    {!studentDetails.reports || studentDetails.reports.length === 0 ? 'Ainda não foi registrado nenhum relatório' :
+                    {reports.length === 0 ? 'Ainda não foi registrado nenhum relatório' :
                         <>
                             <div>
                                 <p className='text-neutral-300 font-light '>Num</p>
@@ -52,7 +71,7 @@ const StudentDetails = () => {
                             <div>
                                 <p className='text-neutral-300 font-light '>Título</p>
                                 {reports?.map( ( relatorio,index ) => {
-                                    return <Link to={transformInSlug( relatorio.title )} className='underline cursor-pointer flex' key={relatorio.id}>{relatorio?.title} </Link>
+                                    return <p onClick={() => handleShowReport( relatorio )} className='underline cursor-pointer flex' key={relatorio.id}>{relatorio?.title} </p>
                                 } )}
                             </div>
                             <div>
@@ -60,8 +79,7 @@ const StudentDetails = () => {
                                 {reports?.map( ( relatorio,index ) => {
                                     return <div key={relatorio?.id} className='flex items-center gap-2'>
                                         <p >{moment( relatorio?.report_date ).format( 'DD-MM-YYYY' )} </p>
-                                        <PencilSimpleLine className='cursor-pointer' />
-                                        <Trash className='cursor-pointer' />
+                                        <Trash onClick={() => handleDeleteReport( relatorio )} className='cursor-pointer' />
                                     </div>
                                 } )}
                             </div>

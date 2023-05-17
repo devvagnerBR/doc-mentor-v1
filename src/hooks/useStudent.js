@@ -1,4 +1,4 @@
-import { ref,set,update } from 'firebase/database';
+import { ref,remove,set,update } from 'firebase/database';
 import React from 'react'
 import { db } from '../database/firebase';
 import { v4 as IdGenerator } from 'uuid'
@@ -39,7 +39,14 @@ const useStudent = () => {
   }
 
 
-  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent }
+  const deleteReport = async ( reportId,studentId ) => {
+
+    const refReport = ref( db,`teachers/${teacher.id}/students/${studentId}/reports/${reportId}` )
+    await remove( refReport ).then( () => console.log( 'relatório excluído com sucesso' ) )
+
+  }
+
+  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent,deleteReport }
 }
 
 export default useStudent

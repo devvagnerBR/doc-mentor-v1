@@ -28,10 +28,10 @@ const Dashboard = () => {
                     <Route path='meus-alunos' exact element={<MyStudents />} />
                     <Route path='meus-dados' element={<MyData />} />
                     <Route path='minhas-escolas' element={<MySchools />} />
-                    <Route path='meus-alunos/:student/editar-aluno' element={<EditStudent />} />
-                    <Route path='meus-alunos/:student' element={<StudentDetails />} />
-                    <Route path='meus-alunos/:student/:report' element={<StudentReport />} />
-                    <Route path='meus-alunos/:student/novo-relatorio' element={<NewReport />} />
+                    <Route path='meus-alunos/:studentId/editar-aluno' element={<EditStudent />} />
+                    <Route path='meus-alunos/:studentId' element={<StudentDetails />} />
+                    <Route path='meus-alunos/:studentId/:reportId' element={<StudentReport />} />
+                    <Route path='meus-alunos/:studentId/novo-relatorio' element={<NewReport />} />
                     <Route path='meus-alunos/novo-aluno' element={<NewStudent />} />
                 </Routes>
             </section>

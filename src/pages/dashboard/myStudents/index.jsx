@@ -29,9 +29,9 @@ const MyStudents = () => {
     const handleStudentDetails = ( student ) => {
         window.localStorage.setItem( 'student',JSON.stringify( student ) )
         setStudent( student )
-        navigate( `${transformInSlug( student.student_name )} ` )
-
+        navigate( student.id )
     }
+
 
 
     if ( students )

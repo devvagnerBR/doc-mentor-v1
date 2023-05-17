@@ -38,7 +38,7 @@ const NewReport = () => {
 
         await addNewReport( studentDetails.id,body )
         setInputValues( formInitial )
-        navigate(`/dashboard/meus-alunos`)
+        navigate(-1)
     }
 
 
