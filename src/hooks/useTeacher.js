@@ -57,22 +57,6 @@ const useTeacher = () => {
 
 
 
-    // const getStudents = ( path ) => {
-
-
-
-    //     const refData = ref( db,`${path}` );
-    //     onValue( refData,( snapshot ) => {
-    //         let result = snapshot.val()
-    //         if ( result ) {
-    //             result = convertObjInArray( result )
-    //             setData( result );
-    //         }
-
-    //     } )
-
-
-    // }
 
 
 

@@ -3,6 +3,7 @@ import Input from '../../../../components/input'
 import useStudent from '../../../../hooks/useStudent'
 import { AuthContext } from '../../../../context/authContext'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 const formInitial = {
     student_name: '',
@@ -32,9 +33,9 @@ const NewStudent = () => {
 
     const handleCreateNewStudent = async ( event ) => {
         event.preventDefault()
-        await addNewStudent( { ...inputValues,status: 'ativo' },teacher.id )
+        await addNewStudent( { ...inputValues,status: 'ativo',age: moment().diff( inputValues.birth_day,'years' ) },teacher.id )
         setInputValues( formInitial )
-        navigate('/dashboard/meus-alunos')
+        navigate( '/dashboard/meus-alunos' )
     }
 
 

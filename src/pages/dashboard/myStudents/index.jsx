@@ -6,21 +6,20 @@ import { Plus } from '@phosphor-icons/react'
 import useTeacher from '../../../hooks/useTeacher';
 import { AuthContext } from './../../../context/authContext';
 import useGetStudents from '../../../hooks/useGetStudents';
+import moment from 'moment';
+import useStudent from '../../../hooks/useStudent';
 
 const MyStudents = () => {
 
-    // const students = [
-    //     { id: 1,nome: 'Wagner Luiz',idade: 28,escola: 'CNEC',deficiencia: 'TDAH',dias_de_atendimento: 'quinta',ultimo_relatorio: '09/05/2023',status: 'ativo' },
-    //     { id: 2,nome: 'Cassiane Costa',idade: 23,escola: 'UFRJ',deficiencia: 'Anssiedade',dias_de_atendimento: 'segunda e sexta',ultimo_relatorio: '03/05/2023',status: 'ativo' },
-    //     { id: 3,nome: 'Paulo Lopes',idade: 21,escola: 'Maria Teixeira de Paula',deficiencia: 'Todas',dias_de_atendimento: 'quarta',ultimo_relatorio: '14/05/2023',status: 'ativo' },
-    // ]
-
-
-
-    // const getStudents = useTeacher()
-    // const result = getStudents.getStudents( `teachers/${teacher?.id}/students` )
-
+    moment.locale( 'pt-br' );
     const { students } = useGetStudents()
+    const { maskStudentAsInactive } = useStudent()
+
+
+    const handleMarkStudentAsInactive = async ( student ) => {
+        await maskStudentAsInactive( student.id )
+    }
+
 
     if ( students )
         return (
@@ -54,10 +53,10 @@ const MyStudents = () => {
                     </div>
 
                     <div className=''>
-                        <p className='text-neutral-300 font-light '>Nascimento</p>
+                        <p className='text-neutral-300 font-light '>Idade</p>
 
                         {students && students.map( ( student,index ) => {
-                            return <p key={student.id} >{student.birth_day}</p>
+                            return <p key={student.id} >{student.age}</p>
                         } )}
                     </div>
 
@@ -85,14 +84,18 @@ const MyStudents = () => {
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Último relatório</p>
                         {students.map( ( student,index ) => {
-                            return <p key={student.id}>{Date.now()}</p>
+                            return <p key={student.id}>{student.last_report ? moment( student.last_report ).startOf( 'days' ).fromNow() : 'nenhum'}</p>
                         } )}
                     </div>
-                    <div className=''>
-                        <p className='text-neutral-300 font-light '>status</p>
+                    <div className='flex flex-col items-center justify-center  gap-2 '>
+                        <p className='text-neutral-300 font-light  flex gap-2'>status</p>
                         {students.map( ( student,index ) => {
-                            return <p key={student.id}>{student.status}</p>
+                            return <div className='flex gap-2'>
+                                <p className={`${student.status === 'ativo' && 'text-green-600'}`} key={student.id}>{student.status}</p>
+                                <button onClick={() => handleMarkStudentAsInactive( student )} className='bg-red-500 w-6 cursor-pointer flex '>X</button>
+                            </div>
                         } )}
+
                     </div>
 
 

@@ -28,6 +28,8 @@ const useGetStudents = () => {
                             shift: value.shift,
                             status: value.status,
                             student_name: value.student_name,
+                            age: value.age,
+                            last_report: value.last_report ?? ''
                         }
 
 
@@ -48,50 +50,3 @@ const useGetStudents = () => {
 
 export default useGetStudents
 
-/* 
-                            id: key,
-                            birth_day: value.birth_day,
-                            class_name: value.class_name,
-                            deficit: value.deficit,
-                            parent_phone: value.parent_phone,
-                            school_name: value.school_name,
-                            service_days: value.service_days,
-                            shift: value.shift,
-                            status: value.status,
-                            student_name: value.student_name,
-*/
-
-
-/* 
-
-birth_day
-: 
-"1994-12-21"
-class_name
-: 
-"3003 F2"
-deficit
-: 
-"TDAH"
-parent_phone
-: 
-"22999887464"
-school_name
-: 
-"CNEC RO"
-service_days
-: 
-"Segunda"
-shift
-: 
-"Noite"
-status
-: 
-"ativo"
-student_name
-: 
-"Wagner Luiz da Silva Guimarães"
-[[Prototype]]
-: 
-Object
-*/
