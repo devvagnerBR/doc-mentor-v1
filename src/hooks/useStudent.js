@@ -21,14 +21,18 @@ const useStudent = () => {
   const maskStudentAsInactive = async ( studentId ) => {
 
     if ( window.confirm( 'Deseja mesmo marcar esse estudante como inativo?' ) ) {
-      update( ref( db,`teachers/${teacher.id}/students/${studentId}` ), {status: 'inactive'})
+      update( ref( db,`teachers/${teacher.id}/students/${studentId}` ),{ status: 'inactive' } )
         .then( () => console.log( 'Aluno marcado como inativo' ) )
     }
   }
 
+  const addNewReport = async ( studentId,body ) => {
+    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/reports/${IdGenerator()}` ),body )
+    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/` ),{ last_report: Date.now() } )
+      .then( () => console.log( 'relatório salvo com sucesso' ) )
+  }
 
-
-  return { addNewStudent,maskStudentAsInactive }
+  return { addNewStudent,maskStudentAsInactive,addNewReport }
 }
 
 export default useStudent

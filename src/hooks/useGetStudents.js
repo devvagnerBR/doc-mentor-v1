@@ -29,7 +29,11 @@ const useGetStudents = () => {
                             status: value.status,
                             student_name: value.student_name,
                             age: value.age,
-                            last_report: value.last_report ?? ''
+                            last_report: value.last_report ?? '',
+                            // reports: value.reports ?? ''
+                            reports: Object.entries( value.reports ?? {} ).map( ( [key,value] ) => {
+                                return { id: key, content: value.content, title: value.title, report_date: value.report_date  }
+                            } )
                         }
 
 
@@ -49,4 +53,3 @@ const useGetStudents = () => {
 }
 
 export default useGetStudents
-

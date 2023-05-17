@@ -1,23 +1,36 @@
 import React from 'react'
-import { Link,Route,Router,Routes } from 'react-router-dom'
-import StudentDetails from './studentDetails'
+import moment from 'moment';
+import 'moment/dist/locale/pt-br';
+
+
+import { Link,useNavigate } from 'react-router-dom'
+import { TrashSimple } from '@phosphor-icons/react'
 import transformInSlug from './../../../util/transformInSlug';
 import { Plus } from '@phosphor-icons/react'
-import useTeacher from '../../../hooks/useTeacher';
-import { AuthContext } from './../../../context/authContext';
 import useGetStudents from '../../../hooks/useGetStudents';
-import moment from 'moment';
 import useStudent from '../../../hooks/useStudent';
+import { StudentContext } from '../../../context/studentsContext';
+
+
 
 const MyStudents = () => {
 
-    moment.locale( 'pt-br' );
+
+    const navigate = useNavigate()
     const { students } = useGetStudents()
     const { maskStudentAsInactive } = useStudent()
+    const { setStudent } = React.useContext( StudentContext )
 
 
     const handleMarkStudentAsInactive = async ( student ) => {
         await maskStudentAsInactive( student.id )
+    }
+
+    const handleStudentDetails = ( student ) => {
+        window.localStorage.setItem( 'student',JSON.stringify( student ) )
+        setStudent( student )
+        navigate( `${transformInSlug( student.student_name )} ` )
+
     }
 
 
@@ -43,12 +56,13 @@ const MyStudents = () => {
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Nome</p>
                         {students && students.map( ( student ) => {
-                            return <Link
+                            return <p
                                 key={student.id}
                                 className='underline cursor-pointer flex'
-                                to={transformInSlug( student.student_name )}>
+                                onClick={() => handleStudentDetails( student )}
+                            >
                                 {student.student_name}
-                            </Link>
+                            </p>
                         } )}
                     </div>
 
@@ -56,7 +70,7 @@ const MyStudents = () => {
                         <p className='text-neutral-300 font-light '>Idade</p>
 
                         {students && students.map( ( student,index ) => {
-                            return <p key={student.id} >{student.age}</p>
+                            return <p key={student.id} >{student.age} anos</p>
                         } )}
                     </div>
 
@@ -84,24 +98,24 @@ const MyStudents = () => {
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Último relatório</p>
                         {students.map( ( student,index ) => {
-                            return <p key={student.id}>{student.last_report ? moment( student.last_report ).startOf( 'days' ).fromNow() : 'nenhum'}</p>
+                            return <p key={student.id}>{student.last_report ? moment( student?.last_report ).fromNow() : 'nenhum'}</p>
                         } )}
                     </div>
-                    <div className='flex flex-col items-center justify-center  gap-2 '>
-                        <p className='text-neutral-300 font-light  flex gap-2'>status</p>
+                    <div className='flex flex-col items-start justify-center   '>
+                        <p className='text-neutral-300 font-light  flex '>status</p>
                         {students.map( ( student,index ) => {
-                            return <div className='flex gap-2'>
-                                <p className={`${student.status === 'ativo' && 'text-green-600'}`} key={student.id}>{student.status}</p>
-                                <button onClick={() => handleMarkStudentAsInactive( student )} className='bg-red-500 w-6 cursor-pointer flex '>X</button>
+                            return <div key={student.id} className='flex gap-2 items-center'>
+                                <p className={`${student.status === 'ativo' && 'text-green-600'}`} >{student.status}</p>
+                                {student.status !== 'inactive' && <TrashSimple onClick={() => handleMarkStudentAsInactive( student )} className='cursor-pointer flex ' />}
                             </div>
                         } )}
 
                     </div>
 
 
-                </main>
+                </main >
 
-            </div>
+            </div >
         )
 }
 

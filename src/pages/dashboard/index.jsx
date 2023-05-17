@@ -9,6 +9,7 @@ import MySchools from './mySchools'
 import StudentDetails from './myStudents/studentDetails'
 import StudentReport from './myStudents/studentReport/index';
 import NewStudent from './myStudents/newStudent'
+import NewReport from './myStudents/newReport/index';
 
 const Dashboard = () => {
 
@@ -28,6 +29,7 @@ const Dashboard = () => {
                     <Route path='minhas-escolas' element={<MySchools />} />
                     <Route path='meus-alunos/:student' element={<StudentDetails />} />
                     <Route path='meus-alunos/:student/:report' element={<StudentReport />} />
+                    <Route path='meus-alunos/:student/novo-relatorio' element={<NewReport />} />
                     <Route path='meus-alunos/novo-aluno' element={<NewStudent />} />
                 </Routes>
             </section>
