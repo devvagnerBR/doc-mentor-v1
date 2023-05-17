@@ -32,7 +32,14 @@ const useStudent = () => {
       .then( () => console.log( 'relatório salvo com sucesso' ) )
   }
 
-  return { addNewStudent,maskStudentAsInactive,addNewReport }
+
+  const updateStudent = async ( studentId,body ) => {
+    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/` ),body )
+      .then( () => console.log( 'dados atualizados com sucesso' ) )
+  }
+
+
+  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent }
 }
 
 export default useStudent

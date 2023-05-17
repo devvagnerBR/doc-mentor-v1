@@ -1,0 +1,128 @@
+[1mdiff --git a/src/hooks/useStudent.js b/src/hooks/useStudent.js[m
+[1mindex a740067..5e3c4f5 100644[m
+[1m--- a/src/hooks/useStudent.js[m
+[1m+++ b/src/hooks/useStudent.js[m
+[36m@@ -32,7 +32,14 @@[m [mconst useStudent = () => {[m
+       .then( () => console.log( 'relatório salvo com sucesso' ) )[m
+   }[m
+ [m
+[31m-  return { addNewStudent,maskStudentAsInactive,addNewReport }[m
+[32m+[m
+[32m+[m[32m  const updateStudent = async ( studentId,body ) => {[m
+[32m+[m[32m    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/` ),body )[m
+[32m+[m[32m      .then( () => console.log( 'dados atualizados com sucesso' ) )[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m
+[32m+[m[32m  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent }[m
+ }[m
+ [m
+ export default useStudent[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/dashboard/index.jsx b/src/pages/dashboard/index.jsx[m
+[1mindex 0b925f5..eb7f0f4 100644[m
+[1m--- a/src/pages/dashboard/index.jsx[m
+[1m+++ b/src/pages/dashboard/index.jsx[m
+[36m@@ -10,6 +10,7 @@[m [mimport StudentDetails from './myStudents/studentDetails'[m
+ import StudentReport from './myStudents/studentReport/index';[m
+ import NewStudent from './myStudents/newStudent'[m
+ import NewReport from './myStudents/newReport/index';[m
+[32m+[m[32mimport EditStudent from './myStudents/editStudent'[m
+ [m
+ const Dashboard = () => {[m
+ [m
+[36m@@ -27,6 +28,7 @@[m [mconst Dashboard = () => {[m
+                     <Route path='meus-alunos' exact element={<MyStudents />} />[m
+                     <Route path='meus-dados' element={<MyData />} />[m
+                     <Route path='minhas-escolas' element={<MySchools />} />[m
+[32m+[m[32m                    <Route path='meus-alunos/:student/editar-aluno' element={<EditStudent />} />[m
+                     <Route path='meus-alunos/:student' element={<StudentDetails />} />[m
+                     <Route path='meus-alunos/:student/:report' element={<StudentReport />} />[m
+                     <Route path='meus-alunos/:student/novo-relatorio' element={<NewReport />} />[m
+[1mdiff --git a/src/pages/dashboard/myStudents/index.jsx b/src/pages/dashboard/myStudents/index.jsx[m
+[1mindex bfddcdc..28738b6 100644[m
+[1m--- a/src/pages/dashboard/myStudents/index.jsx[m
+[1m+++ b/src/pages/dashboard/myStudents/index.jsx[m
+[36m@@ -46,11 +46,11 @@[m [mconst MyStudents = () => {[m
+                     </Link>[m
+                 </header>[m
+ [m
+[31m-                <main className='w-full h-full flex justify-start items-start gap-8 px-4'>[m
+[32m+[m[32m                <main className='w-full h-full flex justify-start items-start gap-7 px-4'>[m
+                     <div>[m
+                         <p className='text-neutral-300 font-light '>Num</p>[m
+                         {students && students.map( ( student,index ) => {[m
+[31m-                            return <p key={student.id} >{index + 1}</p>[m
+[32m+[m[32m                            return <p className='text-sm' key={student.id} >{index + 1}</p>[m
+                         } )}[m
+                     </div>[m
+                     <div className=''>[m
+[36m@@ -58,7 +58,7 @@[m [mconst MyStudents = () => {[m
+                         {students && students.map( ( student ) => {[m
+                             return <p[m
+                                 key={student.id}[m
+[31m-                                className='underline cursor-pointer flex'[m
+[32m+[m[32m                                className='underline cursor-pointer flex text-sm'[m
+                                 onClick={() => handleStudentDetails( student )}[m
+                             >[m
+                                 {student.student_name}[m
+[36m@@ -70,7 +70,7 @@[m [mconst MyStudents = () => {[m
+                         <p className='text-neutral-300 font-light '>Idade</p>[m
+ [m
+                         {students && students.map( ( student,index ) => {[m
+[31m-                            return <p key={student.id} >{student.age} anos</p>[m
+[32m+[m[32m                            return <p className='text-sm' key={student.id} >{student.age} anos</p>[m
+                         } )}[m
+                     </div>[m
+ [m
+[36m@@ -79,34 +79,34 @@[m [mconst MyStudents = () => {[m
+                     <div className=''>[m
+                         <p className='text-neutral-300 font-light '>Escola</p>[m
+                         {students && students.map( ( student,index ) => {[m
+[31m-                            return <p key={student.id}>{student.school_name}</p>[m
+[32m+[m[32m                            return <p className='text-sm' key={student.id}>{student.school_name}</p>[m
+                         } )}[m
+                     </div>[m
+ [m
+                     <div className=''>[m
+                         <p className='text-neutral-300 font-light '>Deficiência</p>[m
+                         {students.map( ( student,index ) => {[m
+[31m-                            return <p key={student.id}>{student.deficit}</p>[m
+[32m+[m[32m                            return <p className='text-sm' key={student.id}>{student.deficit}</p>[m
+                         } )}[m
+                     </div>[m
+                     <div className=''>[m
+                         <p className='text-neutral-300 font-light '>Dias de atendimento</p>[m
+                         {students.map( ( student,index ) => {[m
+[31m-                            return <p key={student.id}>{student.service_days}</p>[m
+[32m+[m[32m                            return <p className='text-sm' key={student.id}>{student.service_days}</p>[m
+                         } )}[m
+                     </div>[m
+                     <div className=''>[m
+                         <p className='text-neutral-300 font-light '>Último relatório</p>[m
+                         {students.map( ( student,index ) => {[m
+[31m-                            return <p key={student.id}>{student.last_report ? moment( student?.last_report ).fromNow() : 'nenhum'}</p>[m
+[32m+[m[32m                            return <p className='text-sm' key={student.id}>{student.last_report ? moment( student?.last_report ).fromNow() : 'nenhum'}</p>[m
+                         } )}[m
+                     </div>[m
+                     <div className='flex flex-col items-start justify-center   '>[m
+                         <p className='text-neutral-300 font-light  flex '>status</p>[m
+                         {students.map( ( student,index ) => {[m
+                             return <div key={student.id} className='flex gap-2 items-center'>[m
+[31m-                                <p className={`${student.status === 'ativo' && 'text-green-600'}`} >{student.status}</p>[m
+[31m-                                {student.status !== 'inactive' && <TrashSimple onClick={() => handleMarkStudentAsInactive( student )} className='cursor-pointer flex ' />}[m
+[32m+[m[32m                                <p className={` text-sm ${student.status === 'ativo' && 'text-green-600'}`} >{student.status}</p>[m
+[32m+[m[32m                                {student.status !== 'inactive' && <TrashSimple onClick={() => handleMarkStudentAsInactive( student )} className='cursor-pointer flex text-neutral-500 ' />}[m
+                             </div>[m
+                         } )}[m
+ [m
+[1mdiff --git a/src/pages/dashboard/myStudents/studentDetails/index.jsx b/src/pages/dashboard/myStudents/studentDetails/index.jsx[m
+[1mindex 7157fbe..2b46568 100644[m
+[1m--- a/src/pages/dashboard/myStudents/studentDetails/index.jsx[m
+[1m+++ b/src/pages/dashboard/myStudents/studentDetails/index.jsx[m
+[36m@@ -19,7 +19,7 @@[m [mconst StudentDetails = () => {[m
+                 <div className='flex items-end justify-center gap-2'>[m
+                     <h1 className='text-2xl font-Saira font-medium'>{studentDetails?.student_name}</h1>[m
+                     <div>[m
+[31m-                        <h1 className=' font-Saira underline  text-amber-400 cursor-pointer'>editar aluno</h1>[m
+[32m+[m[32m                        <Link t

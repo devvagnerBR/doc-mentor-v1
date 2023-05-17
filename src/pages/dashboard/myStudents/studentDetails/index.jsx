@@ -19,7 +19,7 @@ const StudentDetails = () => {
                 <div className='flex items-end justify-center gap-2'>
                     <h1 className='text-2xl font-Saira font-medium'>{studentDetails?.student_name}</h1>
                     <div>
-                        <h1 className=' font-Saira underline  text-amber-400 cursor-pointer'>editar aluno</h1>
+                        <Link to={`editar-aluno`} className=' font-Saira underline  text-amber-400 cursor-pointer'>editar aluno</Link>
                     </div>
                 </div>
 

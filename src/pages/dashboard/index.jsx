@@ -10,6 +10,7 @@ import StudentDetails from './myStudents/studentDetails'
 import StudentReport from './myStudents/studentReport/index';
 import NewStudent from './myStudents/newStudent'
 import NewReport from './myStudents/newReport/index';
+import EditStudent from './myStudents/editStudent'
 
 const Dashboard = () => {
 
@@ -27,6 +28,7 @@ const Dashboard = () => {
                     <Route path='meus-alunos' exact element={<MyStudents />} />
                     <Route path='meus-dados' element={<MyData />} />
                     <Route path='minhas-escolas' element={<MySchools />} />
+                    <Route path='meus-alunos/:student/editar-aluno' element={<EditStudent />} />
                     <Route path='meus-alunos/:student' element={<StudentDetails />} />
                     <Route path='meus-alunos/:student/:report' element={<StudentReport />} />
                     <Route path='meus-alunos/:student/novo-relatorio' element={<NewReport />} />
