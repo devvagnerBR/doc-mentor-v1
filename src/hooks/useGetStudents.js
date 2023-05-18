@@ -3,7 +3,7 @@ import { AuthContext } from "../context/authContext"
 import { onValue,ref } from "firebase/database"
 import { db } from "../database/firebase"
 
-const useGetStudents = () => {
+const useGetStudents = ( ) => {
 
     const [students,setStudents] = React.useState( [] )
     const teacher = React.useContext( AuthContext )
@@ -11,7 +11,9 @@ const useGetStudents = () => {
     React.useEffect( () => {
 
         const getStudents = async () => {
-            const pathRef = ref( db,`teachers/${teacher?.id}` );
+
+            const pathRef =  ref( db,`teachers/${teacher?.id}` );
+
             onValue( pathRef,( snapshot ) => {
                 let data = snapshot.val();
                 const parsedStudents = Object.entries( data?.students ?? {} ).map( ( [key,value] ) => {

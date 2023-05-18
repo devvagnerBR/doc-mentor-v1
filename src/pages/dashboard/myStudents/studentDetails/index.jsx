@@ -13,14 +13,15 @@ const StudentDetails = () => {
 
     const navigate = useNavigate()
     const { deleteReport } = useStudent()
-    const { student } = React.useContext( StudentContext )
+    const { student,setReport } = React.useContext( StudentContext )
     const [studentDetails,setStudentDetails] = React.useState( student || JSON.parse( window.localStorage.getItem( 'student' ) ) )
     const { reports } = useGetReports()
 
     const handleShowReport = async ( report ) => {
-
-        window.localStorage.setItem( 'currentReport',JSON.stringify( report ) )
-        navigate( transformInSlug( report.title ) )
+        
+        setReport( report );
+        //window.localStorage.setItem( 'currentReport',JSON.stringify( report ) )
+        navigate( transformInSlug( report.id ) )
 
     }
 
@@ -30,7 +31,7 @@ const StudentDetails = () => {
         }
     }
 
-    
+
     return (
         <div className='w-full h-full flex flex-col'>
 
