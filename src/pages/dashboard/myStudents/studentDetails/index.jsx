@@ -30,7 +30,7 @@ const StudentDetails = () => {
         }
     }
 
-    console.log(reports);
+    
     return (
         <div className='w-full h-full flex flex-col'>
 

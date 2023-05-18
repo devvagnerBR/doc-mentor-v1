@@ -3,10 +3,10 @@ import useTeacher from '../../../hooks/useTeacher'
 
 const MyHome = () => {
 
-  const { sigInWithGoogle ,teacher} = useTeacher()
+  const { sigInWithGoogle,teacher,signInWithGoogle2 } = useTeacher()
 
   const handleLogin = async () => {
-    await sigInWithGoogle()
+    await signInWithGoogle2()
   }
 
 

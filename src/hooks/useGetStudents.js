@@ -39,6 +39,8 @@ const useGetStudents = () => {
                 } )
 
                 setStudents( parsedStudents )
+
+
             } )
         }
 
@@ -48,7 +50,7 @@ const useGetStudents = () => {
     },[teacher,setStudents] )
 
 
-    
+
 
     return { students }
 
