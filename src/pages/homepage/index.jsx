@@ -3,13 +3,16 @@ import { GoogleLogo } from '@phosphor-icons/react'
 import useTeacher from '../../hooks/useTeacher'
 import { useNavigate } from 'react-router-dom'
 
+import { AuthContext } from '../../context/authContext'
+
 const Homepage = () => {
 
     const { sigInWithGoogle } = useTeacher()
+    const teacher = React.useContext( AuthContext )
     const navigate = useNavigate()
-
     const handleSignIn = async () => {
-        await sigInWithGoogle()
+
+        if ( teacher.length === 0 ) await sigInWithGoogle()
         navigate( '/dashboard/meus-alunos' )
     }
 
