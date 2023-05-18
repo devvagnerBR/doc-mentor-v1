@@ -2,7 +2,9 @@ import React from 'react'
 
 const MySchools = () => {
   return (
-    <div>MySchools</div>
+    <div className='w-full h-full flex flex-col'>
+      <p>Minhas escolas</p>
+    </div>
   )
 }
 

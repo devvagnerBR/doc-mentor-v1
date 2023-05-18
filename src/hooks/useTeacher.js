@@ -12,22 +12,6 @@ const useTeacher = () => {
     const [teacher,setTeacher] = React.useState( [] )
     const provider = new GoogleAuthProvider;
 
-    // const sigInWithGoogle = async () => {
-
-    //     const provider = new GoogleAuthProvider()
-    //     const result = await signInWithPopup( auth,provider );
-
-    //     if ( result.user ) {
-    //         const { displayName,photoURL,uid,email } = result.user
-    //         if ( !displayName,!photoURL ) {
-    //             throw new Error( 'Missing information from Google Account' )
-    //         }
-    //         await updateData( `teachers/${user.id}/infos`,{ id: uid,name: displayName,avatar: photoURL,email: email } )
-    //         setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
-    //     }
-
-
-    // }
 
     const checkForUpdate = async () => {
 

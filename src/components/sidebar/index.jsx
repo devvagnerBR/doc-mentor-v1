@@ -9,8 +9,8 @@ const SideBar = () => {
     const navItems = [
         { id: 1,icon: HouseLine,content: 'Início',path: '/dashboard' },
         { id: 2,icon: Backpack,content: 'Meus alunos',path: 'meus-alunos' },
-        { id: 3,icon: AddressBook,content: 'Meus dados',path: 'minhas-escolas' },
-        { id: 4,icon: ChalkboardSimple,content: 'Minhas escolas',path: 'meus-dados' },
+        { id: 3,icon: AddressBook,content: 'Meus dados',path: 'meus-dados' },
+        { id: 4,icon: ChalkboardSimple,content: 'Minhas escolas',path: 'minhas-escolas' },
     ]
 
     const { logOut } = useTeacher()

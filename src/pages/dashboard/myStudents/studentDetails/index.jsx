@@ -23,16 +23,17 @@ const StudentDetails = () => {
     const handleDeleteReport = async ( report ) => {
 
         if ( window.confirm( 'Deseja mesmo excluir esse relatório?' ) ) {
-            await deleteReport( report.id,studentDetails.id )
+            await deleteReport( report.id,studentId )
         }
     }
+
 
     return (
         <div className='w-full h-full flex flex-col'>
 
             <header className='w-full flex h-25 justify-start items-start p-3 shrink-0 flex-col'>
                 <div className='flex items-end justify-center gap-2'>
-                    <h1 className='text-2xl font-Saira font-medium'>{student?.student_name}</h1>
+                    <h1 className='text-2xl font-Saira font-medium'>{student?.name}</h1>
                     <div>
                         <Link to={`editar-aluno`} className=' font-Saira underline  text-amber-400 cursor-pointer'>editar aluno</Link>
                     </div>
