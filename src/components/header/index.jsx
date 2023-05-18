@@ -13,7 +13,7 @@ const Header = () => {
         <header className='h-20  border-b   w-full flex items-center justify-between pr-4 gap-2'>
             <CaretLeft onClick={() => navigate( -1 )} className='ml-2 cursor-pointer' size={30} />
 
-            <div className='flex '>
+            <div className='flex  gap-2'>
 
                 <div className='flex flex-col  items-end h-9 justify-center'>
                     <h1 className='text-xs text-neutral-700 leading-[5px] font-Saira'>Bem vindo (a)</h1>
