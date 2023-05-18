@@ -12,8 +12,8 @@ const MyHome = () => {
 
   return (
     <div>
-      MyHome
-      <button type='onSubmit' onClick={handleLogin}>GOOGLE LOGIN</button>
+      
+      <button type='onSubmit'onClick={handleLogin}>MyHome Page</button>
     </div>
   )
 }
