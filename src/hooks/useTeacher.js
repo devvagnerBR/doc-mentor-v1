@@ -5,25 +5,29 @@ import { GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut } from 'f
 import convertObjInArray from '../util/convertObjInArray';
 import { useNavigate } from 'react-router-dom';
 
+import moment from 'moment';
+import 'moment/dist/locale/pt-br';
+import usePayment from './usePayment';
 
 const useTeacher = () => {
 
+    const { setPaymentDate } = usePayment()
     const navigate = useNavigate()
     const [teacher,setTeacher] = React.useState( [] )
     const provider = new GoogleAuthProvider;
 
-
     const checkForUpdate = async () => {
 
-        onAuthStateChanged( auth,( user ) => {
+        onAuthStateChanged( auth,async ( user ) => {
 
             if ( user ) {
                 const { displayName,photoURL,uid,email } = user
                 if ( !displayName,!photoURL ) {
                     throw new Error( 'Missing information from Google Account' )
                 }
-                updateData( ( `teachers/${uid}/infos/` ),{ id: uid,name: displayName,avatar: photoURL,email: email } )
+                await updateData( ( `teachers/${uid}/infos/` ),{ id: uid,name: displayName,avatar: photoURL,email: email} )
                 setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
+
             }
         } )
 
@@ -49,12 +53,24 @@ const useTeacher = () => {
                 throw new Error( 'Missing information from Google Account' )
             }
 
-            await updateData( `teachers/${result.user.uid}/infos`,{ id: uid,name: displayName,avatar: photoURL,email: email } )
+            await updateData( ( `teachers/${uid}/infos/` ),{ id: uid,name: displayName,avatar: photoURL,email: email } )
             setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
+
         }
     }
 
+    // React.useEffect( () => {
 
+    //     const verifyPremium = async () => {
+    //         if ( teacher ) {
+    //             console.log( teacher.payment_date );
+    //             if ( teacher.payment_date ) return false
+    //             await setPaymentDate( teacher,Date.now() )
+    //         }
+    //     }
+
+    //     verifyPremium()
+    // },[teacher] )
 
     const logOut = async () => {
 

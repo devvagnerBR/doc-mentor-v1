@@ -9,8 +9,6 @@ const MyData = () => {
 
   const teacher = React.useContext( AuthContext )
   const { students } = useGetStudents()
-  console.log( teacher );
-
 
   return (
     <div className='w-full h-full flex flex-col'>

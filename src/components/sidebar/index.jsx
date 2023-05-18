@@ -3,9 +3,13 @@ import { HouseLine,Backpack,AddressBook,ChalkboardSimple,SignOut } from '@phosph
 import { NavLink } from 'react-router-dom'
 import useTeacher from '../../hooks/useTeacher'
 
+import moment from 'moment';
+import 'moment/dist/locale/pt-br';
+import { AuthContext } from './../../context/authContext';
+
 const SideBar = () => {
 
-
+    // const teacher = React.useContext( AuthContext )
     const navItems = [
         { id: 1,icon: HouseLine,content: 'Início',path: '/dashboard' },
         { id: 2,icon: Backpack,content: 'Meus alunos',path: 'meus-alunos' },
@@ -15,7 +19,18 @@ const SideBar = () => {
 
     const { logOut } = useTeacher()
 
+    // const today = moment()
 
+    // const expiresDate = today.add( 30,'days' )
+    //console.log( expiresDate.format( 'LL' ) );
+    //console.log( teacher.payment_date );
+
+    /* 
+        const today = Date.now()
+
+   
+    console.log( moment(today).format('LLL') );
+    */
     return (
         <div className='bg-neutral-800 w-60 h-full flex items-center flex-col justify-start  shrink-0'>
 
@@ -41,9 +56,13 @@ const SideBar = () => {
                 } )}
             </nav>
 
-            <div className='flex h-20 items-center w-full justify-center gap-2'>
-                <SignOut onClick={() => logOut()} size={25} className='text-neutral-300 cursor-pointer' />
-                <p className='text-stone-300 text-sm'>Sair</p>
+            <div className='flex h-20 items-center flex-col w-full justify-start px-3 gap-2'>
+                <div onClick={() => logOut()} className=' flex gap-2 items-center cursor-pointer'>
+                    <SignOut size={25} className='text-neutral-300 cursor-pointer' />
+                    <p className='text-stone-300 text-sm'>Sair</p>
+                </div>
+
+                <p className='text-stone-300 text-sm pb-2'>{moment().format( 'LL' )}</p>
             </div>
         </div>
     )

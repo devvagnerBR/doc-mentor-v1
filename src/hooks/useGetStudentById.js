@@ -38,7 +38,7 @@ const useGetStudentById = ( studentId ) => {
 
 
 
-                //setStudent( parsedStudent )
+     
             } )
 
 

@@ -27,6 +27,7 @@ const MyStudents = () => {
         await maskStudentAsInactive( student.id )
     }
 
+    
     const handleStudentDetails = ( student ) => {
         window.localStorage.setItem( 'student',JSON.stringify( student ) )
         setStudent( student )

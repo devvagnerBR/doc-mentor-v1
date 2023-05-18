@@ -9,6 +9,8 @@ const Header = () => {
     const teacher = React.useContext( AuthContext )
     const navigate = useNavigate()
 
+
+
     return (
         <header className='h-[95px]  border-b   w-full flex items-center justify-between pr-4 gap-2'>
             <CaretLeft onClick={() => navigate( -1 )} className='ml-2 cursor-pointer text-neutral-600' size={30} />

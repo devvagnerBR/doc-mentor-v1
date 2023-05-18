@@ -8,11 +8,10 @@ const AuthContextProvider = ( { children } ) => {
 
 
     const { checkForUpdate,teacher } = useTeacher()
-    const infos = useTeacher()
+
 
     React.useEffect( () => {
         checkForUpdate()
-
     },[] )
 
 
