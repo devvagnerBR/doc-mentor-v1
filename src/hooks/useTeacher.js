@@ -12,23 +12,22 @@ const useTeacher = () => {
     const [teacher,setTeacher] = React.useState( [] )
     const provider = new GoogleAuthProvider;
 
-    const sigInWithGoogle = async () => {
+    // const sigInWithGoogle = async () => {
 
-        const provider = new GoogleAuthProvider()
-        const result = await signInWithPopup( auth,provider );
+    //     const provider = new GoogleAuthProvider()
+    //     const result = await signInWithPopup( auth,provider );
 
-        if ( result.user ) {
-            const { displayName,photoURL,uid,email } = result.user
-            if ( !displayName,!photoURL ) {
-                throw new Error( 'Missing information from Google Account' )
-            }
-console.log('hahahaa');
-            await updateData( `teachers/${user.id}/infos`,{ id: uid,name: displayName,avatar: photoURL,email: email } )
-            setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
-        }
+    //     if ( result.user ) {
+    //         const { displayName,photoURL,uid,email } = result.user
+    //         if ( !displayName,!photoURL ) {
+    //             throw new Error( 'Missing information from Google Account' )
+    //         }
+    //         await updateData( `teachers/${user.id}/infos`,{ id: uid,name: displayName,avatar: photoURL,email: email } )
+    //         setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
+    //     }
 
 
-    }
+    // }
 
     const checkForUpdate = async () => {
 
@@ -57,10 +56,9 @@ console.log('hahahaa');
     }
 
 
-    const signInWithGoogle2 = async () => {
+    const sigInWithGoogle = async () => {
         const result = await signInWithPopup( auth,provider )
-        const credential = GoogleAuthProvider.credentialFromResult( result )
-
+        GoogleAuthProvider.credentialFromResult( result )
         if ( result.user ) {
             const { displayName,photoURL,uid,email } = result.user
             if ( !displayName,!photoURL ) {
@@ -82,7 +80,7 @@ console.log('hahahaa');
         } )
     }
 
-    return { checkForUpdate,sigInWithGoogle,teacher,updateData,signInWithGoogle2,logOut }
+    return { checkForUpdate,sigInWithGoogle,teacher,updateData,logOut }
 }
 
 export default useTeacher

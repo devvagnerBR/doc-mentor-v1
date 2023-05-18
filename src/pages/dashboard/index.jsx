@@ -25,9 +25,9 @@ const Dashboard = () => {
 
             <section className='flex flex-col w-full'>
                 <Header />
-                {useProtectedPage( teacher )}
                 <Routes>
                     <Route path='/' element={<MyHome />} />
+                    {useProtectedPage( teacher )}
                     <Route path='meus-alunos' exact element={<MyStudents />} />
                     <Route path='meus-dados' element={<MyData />} />
                     <Route path='minhas-escolas' element={<MySchools />} />
