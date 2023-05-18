@@ -1,6 +1,7 @@
 import React from 'react'
-import { HouseLine,Backpack,AddressBook,ChalkboardSimple } from '@phosphor-icons/react'
+import { HouseLine,Backpack,AddressBook,ChalkboardSimple,SignOut } from '@phosphor-icons/react'
 import { NavLink } from 'react-router-dom'
+import useTeacher from '../../hooks/useTeacher'
 
 const SideBar = () => {
 
@@ -12,7 +13,7 @@ const SideBar = () => {
         { id: 4,icon: ChalkboardSimple,content: 'Minhas escolas',path: 'meus-dados' },
     ]
 
-
+    const { logOut } = useTeacher()
 
 
     return (
@@ -39,6 +40,11 @@ const SideBar = () => {
                     )
                 } )}
             </nav>
+
+            <div className='flex h-20 items-center w-full justify-center gap-2'>
+                <SignOut onClick={() => logOut()} size={25} className='text-neutral-300 cursor-pointer' />
+                <p className='text-stone-300 text-sm'>Sair</p>
+            </div>
         </div>
     )
 }

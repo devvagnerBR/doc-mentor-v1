@@ -1,14 +1,15 @@
 import React from 'react'
 import { auth,db } from '../database/firebase'
 import { ref,remove,update,onValue } from 'firebase/database';
-import { GoogleAuthProvider,onAuthStateChanged,signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut } from 'firebase/auth'
 import convertObjInArray from '../util/convertObjInArray';
+import { useNavigate } from 'react-router-dom';
 
 
 const useTeacher = () => {
 
-    const [teacher,setTeacher] = React.useState( null )
-    const [data,setData] = React.useState( null )
+    const navigate = useNavigate()
+    const [teacher,setTeacher] = React.useState( [] )
     const provider = new GoogleAuthProvider;
 
     const sigInWithGoogle = async () => {
@@ -21,7 +22,7 @@ const useTeacher = () => {
             if ( !displayName,!photoURL ) {
                 throw new Error( 'Missing information from Google Account' )
             }
-
+console.log('hahahaa');
             await updateData( `teachers/${user.id}/infos`,{ id: uid,name: displayName,avatar: photoURL,email: email } )
             setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
         }
@@ -73,8 +74,15 @@ const useTeacher = () => {
 
 
 
+    const logOut = async () => {
 
-    return { checkForUpdate,sigInWithGoogle,teacher,updateData,signInWithGoogle2 }
+        await signOut( auth ).then( () => {
+            console.log( 'usuário deslogado com sucesso' );
+            navigate( '/' )
+        } )
+    }
+
+    return { checkForUpdate,sigInWithGoogle,teacher,updateData,signInWithGoogle2,logOut }
 }
 
 export default useTeacher

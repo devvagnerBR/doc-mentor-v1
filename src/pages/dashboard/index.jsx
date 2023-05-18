@@ -11,11 +11,13 @@ import StudentReport from './myStudents/studentReport/index';
 import NewStudent from './myStudents/newStudent'
 import NewReport from './myStudents/newReport/index';
 import EditStudent from './myStudents/editStudent'
+import useProtectedPage from '../../hooks/useProtectedPage'
+import useTeacher from '../../hooks/useTeacher'
+import { AuthContext } from '../../context/authContext'
 
 const Dashboard = () => {
 
-
-
+    const teacher = React.useContext( AuthContext )
     return (
 
         <div className='bg-gray-50 w-100dvw h-100dvh flex'>
@@ -23,6 +25,7 @@ const Dashboard = () => {
 
             <section className='flex flex-col w-full'>
                 <Header />
+                {useProtectedPage( teacher )}
                 <Routes>
                     <Route path='/' element={<MyHome />} />
                     <Route path='meus-alunos' exact element={<MyStudents />} />

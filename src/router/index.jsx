@@ -5,12 +5,18 @@ import Homepage from './../pages/homepage/index';
 import Dashboard from './../pages/dashboard/index';
 import AuthContextProvider from '../context/authContext';
 import StudentContentProvider from '../context/studentsContext';
+import useProtectedPage from '../hooks/useProtectedPage';
+
 
 
 
 
 
 const RouterConfig = () => {
+
+
+
+
 
     return (
         <BrowserRouter>
