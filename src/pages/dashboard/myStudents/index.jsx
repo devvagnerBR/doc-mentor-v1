@@ -34,7 +34,7 @@ const MyStudents = () => {
 
 
 
-    if ( students )
+    if ( students.length > 0 )
         return (
             <div className='w-full h-full flex flex-col'>
 
@@ -50,7 +50,7 @@ const MyStudents = () => {
                     <div>
                         <p className='text-neutral-300 font-light '>Num</p>
                         {students && students.map( ( student,index ) => {
-                            return <p className='text-sm' key={student.id} >{index + 1}</p>
+                            return <p className={`${student.status === 'inativo' && 'text-neutral-400'}  text-sm`} key={student.id} >{index + 1}</p>
                         } )}
                     </div>
                     <div className=''>
@@ -58,7 +58,7 @@ const MyStudents = () => {
                         {students && students.map( ( student ) => {
                             return <p
                                 key={student.id}
-                                className='underline cursor-pointer flex text-sm'
+                                className={`${student.status === 'inativo' && 'text-neutral-400'} underline cursor-pointer flex text-sm`}
                                 onClick={() => handleStudentDetails( student )}
                             >
                                 {student.student_name}
@@ -70,7 +70,7 @@ const MyStudents = () => {
                         <p className='text-neutral-300 font-light '>Idade</p>
 
                         {students && students.map( ( student,index ) => {
-                            return <p className='text-sm' key={student.id} >{student.age} anos</p>
+                            return <p className={`${student.status === 'inativo' && 'text-neutral-400'}  text-sm`} key={student.id} >{student.age} anos</p>
                         } )}
                     </div>
 
@@ -79,34 +79,34 @@ const MyStudents = () => {
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Escola</p>
                         {students && students.map( ( student,index ) => {
-                            return <p className='text-sm' key={student.id}>{student.school_name}</p>
+                            return <p className={`${student.status === 'inativo' && 'text-neutral-400'}  text-sm`} key={student.id}>{student.school_name}</p>
                         } )}
                     </div>
 
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Deficiência</p>
                         {students.map( ( student,index ) => {
-                            return <p className='text-sm' key={student.id}>{student.deficit}</p>
+                            return <p className={`${student.status === 'inativo' && 'text-neutral-400'}  text-sm`} key={student.id}>{student.deficit}</p>
                         } )}
                     </div>
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Dias de atendimento</p>
                         {students.map( ( student,index ) => {
-                            return <p className='text-sm' key={student.id}>{student.service_days}</p>
+                            return <p className={`${student.status === 'inativo' && 'text-neutral-400'}  text-sm`} key={student.id}>{student.service_days}</p>
                         } )}
                     </div>
                     <div className=''>
                         <p className='text-neutral-300 font-light '>Último relatório</p>
                         {students.map( ( student,index ) => {
-                            return <p className='text-sm' key={student.id}>{student.last_report ? moment( student?.last_report ).fromNow() : 'nenhum'}</p>
+                            return <p className={`${student.status === 'inativo' && 'text-neutral-400'}  text-sm`} key={student.id}>{student.last_report ? moment( student?.last_report ).fromNow() : 'nenhum'}</p>
                         } )}
                     </div>
                     <div className='flex flex-col items-start justify-center   '>
                         <p className='text-neutral-300 font-light  flex '>status</p>
                         {students.map( ( student,index ) => {
                             return <div key={student.id} className='flex gap-2 items-center'>
-                                <p className={` text-sm ${student.status === 'ativo' && 'text-green-600'}`} >{student.status}</p>
-                                {student.status !== 'inactive' && <TrashSimple onClick={() => handleMarkStudentAsInactive( student )} className='cursor-pointer flex text-neutral-500 ' />}
+                                <p className={` text-sm ${student.status === 'ativo' ? 'text-green-600' : 'text-red-400'}`} >{student.status}</p>
+                                {student.status !== 'inativo' && <TrashSimple title='Desativar aluno' onClick={() => handleMarkStudentAsInactive( student )} className='cursor-pointer flex text-neutral-500 ' />}
                             </div>
                         } )}
 

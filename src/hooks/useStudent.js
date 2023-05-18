@@ -21,7 +21,7 @@ const useStudent = () => {
   const maskStudentAsInactive = async ( studentId ) => {
 
     if ( window.confirm( 'Deseja mesmo marcar esse estudante como inativo?' ) ) {
-      update( ref( db,`teachers/${teacher.id}/students/${studentId}` ),{ status: 'inactive' } )
+      update( ref( db,`teachers/${teacher.id}/students/${studentId}` ),{ status: 'inativo' } )
         .then( () => console.log( 'Aluno marcado como inativo' ) )
     }
   }
