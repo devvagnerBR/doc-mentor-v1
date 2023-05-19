@@ -2,6 +2,8 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+
+
 import moment from 'moment';
 import 'moment/dist/locale//pt-br';
 
