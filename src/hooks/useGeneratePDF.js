@@ -1,13 +1,15 @@
-import React from 'react'
-import pdfMake from "pdfmake"
-import pdfFonts from "pdfmake/build/vfs_fonts"
+import * as pdfFonts from "pdfmake/build/vfs_fonts.js";
+import pdfMake from 'pdfmake';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 import moment from 'moment';
 import 'moment/dist/locale//pt-br';
 
 const useGeneratePDF = async ( studentName,schoolName,title,content,reportDate ) => {
-
-    pdfMake.vfs = pdfFonts.pdfMake.vfs
+    
+    
+    
 
     const docDefinition = {
 
