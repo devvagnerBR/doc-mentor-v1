@@ -43,10 +43,14 @@ const useStudent = () => {
 
     const refReport = ref( db,`teachers/${teacher.id}/students/${studentId}/reports/${reportId}` )
     await remove( refReport ).then( () => console.log( 'relatório excluído com sucesso' ) )
-
   }
 
-  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent,deleteReport }
+  const updateReport = async ( studentId,reportId,body ) => {
+    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/reports/${reportId}/` ),body )
+      .then( () => console.log( 'relatório atualizados com sucesso' ) )
+  }
+
+  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent,deleteReport,updateReport }
 }
 
 export default useStudent

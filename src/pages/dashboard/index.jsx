@@ -13,6 +13,7 @@ import NewReport from './myStudents/newReport/index';
 import EditStudent from './myStudents/editStudent'
 import useProtectedPage from '../../hooks/useProtectedPage'
 import { AuthContext } from '../../context/authContext'
+import EditStudentReport from './myStudents/studentReport/editStudentReport'
 
 const Dashboard = () => {
 
@@ -34,8 +35,10 @@ const Dashboard = () => {
                     <Route path='minhas-escolas' element={<MySchools />} />
 
                     <Route path='meus-alunos/:studentId/editar-aluno' element={<EditStudent />} />
+
                     <Route path='meus-alunos/:studentId' element={<StudentDetails />} />
                     <Route path='meus-alunos/:studentId/:reportId' element={<StudentReport />} />
+                    <Route path='meus-alunos/:studentId/:reportId/editar-relatorio' element={<EditStudentReport />} />
                     <Route path='meus-alunos/:studentId/novo-relatorio' element={<NewReport />} />
                     <Route path='meus-alunos/novo-aluno' element={<NewStudent />} />
 
