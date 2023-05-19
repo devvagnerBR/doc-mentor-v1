@@ -3,6 +3,7 @@ import { StudentContext } from '../../../../context/studentsContext'
 import Input from '../../../../components/input'
 import useStudent from '../../../../hooks/useStudent'
 import { useNavigate,useParams } from 'react-router-dom'
+import useGetStudentById from '../../../../hooks/useGetStudentById'
 
 const formInitial = {
     title: '',
@@ -16,6 +17,8 @@ const NewReport = () => {
     const { addNewReport } = useStudent()
     const [inputValues,setInputValues] = React.useState( formInitial );
     const { studentId } = useParams()
+    const { student } = useGetStudentById( studentId )
+
 
 
     const handleChange = ( event ) => {
@@ -33,12 +36,11 @@ const NewReport = () => {
         }
 
 
-        await addNewReport( studentId, body )
+        await addNewReport( studentId,body )
         setInputValues( formInitial )
         navigate( -1 )
 
     }
-
 
 
 
@@ -55,11 +57,11 @@ const NewReport = () => {
                 </div>
 
                 <div className='flex gap-3'>
-                    <h2 className='text-neutral-500'>Escola: <span className='text-neutral-700'>{inputValues.school_name}</span></h2>
-                    <h2 className='text-neutral-500'>Turma: <span className='text-neutral-700'>{inputValues.class_name}</span></h2>
-                    <h2 className='text-neutral-500'>Turno: <span className='text-neutral-700'>{inputValues.shift}</span></h2>
+                    <h2 className='text-neutral-500'>Escola: <span className='text-neutral-700'>{student?.name}</span></h2>
+                    <h2 className='text-neutral-500'>Turma: <span className='text-neutral-700'>{student?.class_name}</span></h2>
+                    <h2 className='text-neutral-500'>Turno: <span className='text-neutral-700'>{student?.shift}</span></h2>
                 </div>
-                <h2 className='text-neutral-500'>Idade: <span className='text-neutral-700'>{inputValues.age} anos</span></h2>
+                <h2 className='text-neutral-500'>Idade: <span className='text-neutral-700'>{student?.age} anos</span></h2>
             </header>
 
             <form onSubmit={handleNewReport} className='p-3 '>
