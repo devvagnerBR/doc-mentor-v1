@@ -1,7 +1,6 @@
-import * as pdfFonts from "pdfmake/build/vfs_fonts.js";
+import * as pdfFonts from "pdfmake/build/vfs_fonts.js"; // <-- vfs_fonts has to be imported before pdfmake
 import pdfMake from 'pdfmake';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
 
 import moment from 'moment';
 import 'moment/dist/locale//pt-br';
