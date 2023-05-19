@@ -4,6 +4,7 @@ import 'moment/dist/locale/pt-br';
 import { Link,useParams } from 'react-router-dom';
 import useGetStudentById from '../../../../hooks/useGetStudentById';
 import useGetReport from '../../../../hooks/useGetReport';
+import useGeneratePDF from '../../../../hooks/useGeneratePDF';
 
 
 const StudentReport = () => {
@@ -11,6 +12,11 @@ const StudentReport = () => {
     const { studentId } = useParams()
     const { student } = useGetStudentById( studentId )
     const { report } = useGetReport()
+
+
+    const handleGeneratePDF = async () => {
+        await useGeneratePDF( student.name,student.school_name,report.title,report.content,report.report_date )
+    }
 
     if ( report )
         return (
@@ -20,7 +26,7 @@ const StudentReport = () => {
                     <div className='flex gap-3 items-end justify-center'>
                         <h1 className='text-2xl font-Saira font-medium'>{student?.name}</h1>
                         <Link to={`editar-relatorio`} className=' font-Saira underline  text-amber-400 cursor-pointer'>editar relatório</Link>
-
+                        <button onClick={handleGeneratePDF} className=' font-Saira underline  text-amber-400 cursor-pointer'>gerar PDF</button>
                     </div>
                     <h1
                         className='text-neutral-400'>

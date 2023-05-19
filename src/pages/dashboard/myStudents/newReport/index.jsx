@@ -2,7 +2,7 @@ import React from 'react'
 import { StudentContext } from '../../../../context/studentsContext'
 import Input from '../../../../components/input'
 import useStudent from '../../../../hooks/useStudent'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useParams } from 'react-router-dom'
 
 const formInitial = {
     title: '',
@@ -14,9 +14,8 @@ const NewReport = () => {
 
     const navigate = useNavigate()
     const { addNewReport } = useStudent()
-    const { student } = React.useContext( StudentContext )
-    const [studentDetails,setStudentDetails] = React.useState( student || JSON.parse( window.localStorage.getItem( 'student' ) ) )
     const [inputValues,setInputValues] = React.useState( formInitial );
+    const { studentId } = useParams()
 
 
     const handleChange = ( event ) => {
@@ -34,10 +33,14 @@ const NewReport = () => {
         }
 
 
-        await addNewReport( studentDetails.id,body )
+        await addNewReport( studentId, body )
         setInputValues( formInitial )
-        navigate(-1)
+        navigate( -1 )
+
     }
+
+
+
 
 
     return (
@@ -45,18 +48,18 @@ const NewReport = () => {
         <div className='w-full h-full flex flex-col'>
             <header className='w-full flex h-25 justify-start items-start p-3 shrink-0 flex-col'>
                 <div className='flex items-end justify-center gap-2'>
-                    <h1 className='text-2xl font-Saira font-medium'>{studentDetails?.student_name}</h1>
+                    <h1 className='text-2xl font-Saira font-medium'>{ }</h1>
                     <div>
                         <h1 className=' font-Saira underline  text-amber-400 cursor-pointer'>editar aluno</h1>
                     </div>
                 </div>
 
                 <div className='flex gap-3'>
-                    <h2 className='text-neutral-500'>Escola: <span className='text-neutral-700'>{studentDetails?.school_name}</span></h2>
-                    <h2 className='text-neutral-500'>Turma: <span className='text-neutral-700'>{studentDetails?.class_name}</span></h2>
-                    <h2 className='text-neutral-500'>Turno: <span className='text-neutral-700'>{studentDetails?.shift}</span></h2>
+                    <h2 className='text-neutral-500'>Escola: <span className='text-neutral-700'>{inputValues.school_name}</span></h2>
+                    <h2 className='text-neutral-500'>Turma: <span className='text-neutral-700'>{inputValues.class_name}</span></h2>
+                    <h2 className='text-neutral-500'>Turno: <span className='text-neutral-700'>{inputValues.shift}</span></h2>
                 </div>
-                <h2 className='text-neutral-500'>Idade: <span className='text-neutral-700'>{studentDetails?.age} anos</span></h2>
+                <h2 className='text-neutral-500'>Idade: <span className='text-neutral-700'>{inputValues.age} anos</span></h2>
             </header>
 
             <form onSubmit={handleNewReport} className='p-3 '>

@@ -23,7 +23,6 @@ const useGetReport = () => {
 
         }
 
-
         getReport()
     },[teacher,studentId,setReport] )
 
