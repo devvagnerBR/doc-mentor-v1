@@ -2,7 +2,7 @@ import React from 'react'
 import useGetReport from '../../../../../hooks/useGetReport'
 import Input from '../../../../../components/input'
 import useStudent from '../../../../../hooks/useStudent'
-import { useParams } from 'react-router-dom'
+import { useNavigate,useParams } from 'react-router-dom'
 
 
 const EditStudentReport = () => {
@@ -11,7 +11,7 @@ const EditStudentReport = () => {
     const [editedReport,setEditedReport] = React.useState( '' )
     const { updateReport } = useStudent()
     const { studentId,reportId } = useParams()
-
+    const navigate = useNavigate()
 
     React.useEffect( () => {
 
@@ -24,6 +24,7 @@ const EditStudentReport = () => {
     const handleUpdateReport = async ( event ) => {
         event.preventDefault()
         await updateReport( studentId,reportId,{ title: editedReport.title,content: editedReport.content } )
+        navigate( -1 )
     }
 
     return (
