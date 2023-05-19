@@ -1,14 +1,11 @@
 import React from 'react'
-import useTeacher from '../../../hooks/useTeacher'
 import { AuthContext } from '../../../context/authContext';
-import useGetStudents from './../../../hooks/useGetStudents';
 import { Link } from 'react-router-dom';
 
 const MyData = () => {
 
 
   const teacher = React.useContext( AuthContext )
-  const { students } = useGetStudents()
 
   return (
     <div className='w-full h-full flex flex-col'>

@@ -1,23 +1,8 @@
 import React from 'react'
 import Input from '../../../../components/input';
 import useStudent from '../../../../hooks/useStudent';
-import { useLocation,useNavigate,useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import useGetStudentById from '../../../../hooks/useGetStudentById';
-
-
-// const formInitial = {
-//     name: '',
-//     birth_day: '',
-//     school_name: '',
-//     class_name: '',
-//     shift: '',
-//     service_days: '',
-//     parent_phone: '',
-//     deficit: '',
-
-// }
-
-
 
 const EditStudent = () => {
 
@@ -29,20 +14,12 @@ const EditStudent = () => {
     const { student } = useGetStudentById( studentId )
     const copy = student
     const [studentDetails,setStudentDetails] = React.useState( copy )
-    // const [inputValues,setInputValues] = React.useState( formInitial );
-
-
-    // const handleChange = ( event ) => {
-    //     const { name,value } = event.target;
-    //     setInputValues( { ...inputValues,[name]: value } )
-    // };
 
     const handleUpdateStudent = async ( event ) => {
         event.preventDefault()
         await updateStudent( studentDetails.id,studentDetails )
         navigate( -1 )
     }
-
 
     React.useEffect( () => {
 

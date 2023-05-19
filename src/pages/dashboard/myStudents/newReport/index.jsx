@@ -2,8 +2,6 @@ import React from 'react'
 import { StudentContext } from '../../../../context/studentsContext'
 import Input from '../../../../components/input'
 import useStudent from '../../../../hooks/useStudent'
-import { v4 as idGenerator } from 'uuid'
-import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 
 const formInitial = {

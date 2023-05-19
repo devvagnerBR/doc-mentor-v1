@@ -1,6 +1,4 @@
 import React from 'react'
-import useGetStudents from '../../../../hooks/useGetStudents'
-import { StudentContext } from '../../../../context/studentsContext'
 import moment from 'moment';
 import 'moment/dist/locale/pt-br';
 import { Link,useParams } from 'react-router-dom';

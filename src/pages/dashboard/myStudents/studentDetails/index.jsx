@@ -1,6 +1,6 @@
 import React from 'react'
 import { Trash,FilePlus } from '@phosphor-icons/react'
-import { Link,useNavigate,useParams } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom'
 import moment from 'moment';
 import 'moment/dist/locale/pt-br';
 import useStudent from '../../../../hooks/useStudent'
