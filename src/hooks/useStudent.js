@@ -9,7 +9,7 @@ import { AuthContext } from '../context/authContext';
 const useStudent = () => {
 
   const teacher = React.useContext( AuthContext )
-
+console.log(teacher);
   const addNewStudent = async ( body,teacherId ) => {
 
     if ( Object.keys( body ).length === 0 ) return false;
@@ -27,8 +27,8 @@ const useStudent = () => {
   }
 
   const addNewReport = async ( studentId,body ) => {
-    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/reports/${IdGenerator()}` ),body )
-    await update( ref( db,`teachers/${teacher.id}/students/${studentId}/` ),{ last_report: Date.now() } )
+    await set( ref( db,`teachers/${teacher.id}/students/${studentId}/reports/${IdGenerator()}` ),body )
+    await update( ref( db,`teachers/${teacher.id}/students/${studentId}` ),{ last_report: Date.now() } )
       .then( () => console.log( 'relatório salvo com sucesso' ) )
   }
 
