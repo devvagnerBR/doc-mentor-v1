@@ -1,11 +1,12 @@
 import React from 'react'
 import Input from '../../../../components/input';
 import useStudent from '../../../../hooks/useStudent';
-import { useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate,useParams } from 'react-router-dom';
+import useGetStudentById from '../../../../hooks/useGetStudentById';
 
 
 const formInitial = {
-    student_name: '',
+    name: '',
     birth_day: '',
     school_name: '',
     class_name: '',
@@ -16,13 +17,19 @@ const formInitial = {
 
 }
 
+
+
 const EditStudent = () => {
+
 
     const navigate = useNavigate()
     const { updateStudent } = useStudent()
-    const [studentDetails,setStudentDetails] = React.useState( JSON.parse( window.localStorage.getItem( 'student' ) ) )
-    const [inputValues,setInputValues] = React.useState( formInitial );
 
+    const { studentId } = useParams()
+    const { student } = useGetStudentById( studentId )
+    const copy = student
+    const [studentDetails,setStudentDetails] = React.useState( copy )
+    const [inputValues,setInputValues] = React.useState( formInitial );
 
 
     const handleChange = ( event ) => {
@@ -33,8 +40,17 @@ const EditStudent = () => {
     const handleUpdateStudent = async ( event ) => {
         event.preventDefault()
         await updateStudent( studentDetails.id,studentDetails )
-        navigate(-1)
+        navigate( -1 )
     }
+
+
+    React.useEffect( () => {
+
+        const copyStudent = student
+        setStudentDetails( copyStudent )
+
+    },[student] )
+
 
 
     return (
@@ -52,16 +68,16 @@ const EditStudent = () => {
                         label='Nome do aluno:'
                         type='text'
                         width='w-[25rem]'
-                        value={studentDetails.student_name}
-                        name='student_name'
-                        onChange={( e ) => setStudentDetails( { ...studentDetails,student_name: e.target.value } )}
+                        value={studentDetails?.name}
+                        name='name'
+                        onChange={( e ) => setStudentDetails( { ...studentDetails,name: e.target.value } )}
                     />
                     <Input
                         label='Data de nascimento:'
                         type='date'
                         width='w-[25rem]'
-                        value={studentDetails.birth_day}
-                        onChange={handleChange}
+                        value={studentDetails?.birth_day}
+                        onChange={( e ) => setStudentDetails( { ...studentDetails,birth_day: e.target.value } )}
                         name='birth_day'
                     />
                 </section>
@@ -71,7 +87,7 @@ const EditStudent = () => {
                         label='Nome da Escola:'
                         type='text'
                         width='w-[25rem]'
-                        value={studentDetails.school_name}
+                        value={studentDetails?.school_name}
                         onChange={( e ) => setStudentDetails( { ...studentDetails,school_name: e.target.value } )}
                         name='school_name'
                     />
@@ -79,7 +95,7 @@ const EditStudent = () => {
                         label='Turma:'
                         type='text'
                         width='w-[12.2rem]'
-                        value={studentDetails.class_name}
+                        value={studentDetails?.class_name}
                         onChange={( e ) => setStudentDetails( { ...studentDetails,class_name: e.target.value } )}
                         name='class_name'
                     />
@@ -87,7 +103,7 @@ const EditStudent = () => {
                         label='Turno:'
                         type='text'
                         width='w-[12.2rem]'
-                        value={studentDetails.shift}
+                        value={studentDetails?.shift}
                         onChange={( e ) => setStudentDetails( { ...studentDetails,shift: e.target.value } )}
                         name='shift'
                     />
@@ -98,7 +114,7 @@ const EditStudent = () => {
                         label='Dias de atendimento:'
                         type='text'
                         width='w-[25rem]'
-                        value={studentDetails.service_days}
+                        value={studentDetails?.service_days}
                         onChange={( e ) => setStudentDetails( { ...studentDetails,service_days: e.target.value } )}
                         name='service_days'
                     />
@@ -106,8 +122,8 @@ const EditStudent = () => {
                         label='Telefone do responsável:'
                         type='number'
                         width='w-[25rem]'
-                        value={studentDetails.parent_phone}
-                        onChange={( e ) => setStudentDetails( { ...studentDetails,parent_phone: e.target.value } )}
+                        value={studentDetails?.parent_phone}
+                        onChange={( e ) => setStudentDetails( { ...studentDetails,parent_phone:  e.target.value } )}
                         name='parent_phone'
                     />
                 </section>
@@ -116,7 +132,7 @@ const EditStudent = () => {
                         label='Deficiência:'
                         type='text'
                         width='w-[50.75rem]'
-                        value={studentDetails.deficit}
+                        value={studentDetails?.deficit}
                         onChange={( e ) => setStudentDetails( { ...studentDetails,deficit: e.target.value } )}
                         name='deficit'
                     />

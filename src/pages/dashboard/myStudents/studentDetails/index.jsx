@@ -1,18 +1,16 @@
 import React from 'react'
-import { PencilSimpleLine,Trash,FilePlus } from '@phosphor-icons/react'
+import { Trash,FilePlus } from '@phosphor-icons/react'
 import { Link,useNavigate,useParams } from 'react-router-dom'
-import transformInSlug from '../../../../util/transformInSlug'
-import { StudentContext } from '../../../../context/studentsContext'
 import moment from 'moment';
 import 'moment/dist/locale/pt-br';
 import useStudent from '../../../../hooks/useStudent'
-import useGetStudents from '../../../../hooks/useGetStudents'
 import useGetReports from '../../../../hooks/useGetReports'
 import useGetStudentById from '../../../../hooks/useGetStudentById'
+import { formatPhoneNumber } from '../../../../util/formatPhoneNumber';
 
 const StudentDetails = () => {
 
-    const navigate = useNavigate()
+
     const { studentId } = useParams()
     const { deleteReport } = useStudent()
     const { reports } = useGetReports()
@@ -44,7 +42,15 @@ const StudentDetails = () => {
                     <h2 className='text-neutral-500'>Turma: <span className='text-neutral-700'>{student?.class_name}</span></h2>
                     <h2 className='text-neutral-500'>Turno: <span className='text-neutral-700'>{student?.shift}</span></h2>
                 </div>
-                <h2 className='text-neutral-500'>Idade: <span className='text-neutral-700'>{student?.age} anos</span></h2>
+                <div className='flex gap-3'>
+                    <h2 className='text-neutral-500'>Idade: <span className='text-neutral-700'>{student?.age} anos</span></h2>
+                    <h2 className='text-neutral-500'>Data de nascimento: <span className='text-neutral-700'>{moment( student?.birth_day ).format( 'L' )}</span></h2>
+                </div>
+                <div className='flex flex-col'>
+                    <h2 className='text-neutral-500'>Telefone do responsável: <span className='text-neutral-700'>{student?.parent_phone && formatPhoneNumber( student?.parent_phone )}</span></h2>
+                    <h2 className='text-neutral-500'>Dias de atendimento: <span className='text-neutral-700'>{student?.service_days}</span></h2>
+                    <h2 className='text-neutral-500'>Necessidade especial: <span className='text-neutral-700'>{student?.deficit}</span></h2>
+                </div>
             </header>
 
             <section className='w-full h-full flex flex-col '>

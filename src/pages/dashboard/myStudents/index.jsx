@@ -29,7 +29,6 @@ const MyStudents = () => {
 
 
     const handleStudentDetails = ( student ) => {
-        window.localStorage.setItem( 'student',JSON.stringify( student ) )
         setStudent( student )
         navigate( student.id )
     }
