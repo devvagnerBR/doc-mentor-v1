@@ -25,7 +25,6 @@ const MyStudents = () => {
         navigate( student.id )
     }
 
-
     return (
         <div className={`w-full h-full flex flex-col`}>
 
