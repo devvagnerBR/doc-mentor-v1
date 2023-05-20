@@ -9,7 +9,6 @@ import { AuthContext } from '../context/authContext';
 const useStudent = () => {
 
   const teacher = React.useContext( AuthContext )
-console.log(teacher);
   const addNewStudent = async ( body,teacherId ) => {
 
     if ( Object.keys( body ).length === 0 ) return false;

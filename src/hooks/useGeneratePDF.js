@@ -32,8 +32,8 @@ const useGeneratePDF = async ( studentName,schoolName,title,content,reportDate )
             },
             {
                 text: `Escola: ${schoolName}`,
-                fontSize: 9,
-                margin: [15,15,0,5]
+                fontSize: 12,
+                margin: [15,-5,0,5]
             },
             {
                 text: content,

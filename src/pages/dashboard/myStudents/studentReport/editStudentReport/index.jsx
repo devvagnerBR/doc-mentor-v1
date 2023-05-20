@@ -8,7 +8,7 @@ import { useNavigate,useParams } from 'react-router-dom'
 const EditStudentReport = () => {
 
     const { report } = useGetReport()
-    const [editedReport,setEditedReport] = React.useState( '' )
+    const [editedReport,setEditedReport] = React.useState({} )
     const { updateReport } = useStudent()
     const { studentId,reportId } = useParams()
     const navigate = useNavigate()
@@ -16,7 +16,7 @@ const EditStudentReport = () => {
     React.useEffect( () => {
 
         const copyReport = report;
-        setEditedReport( copyReport )
+        if ( copyReport !== null ) return setEditedReport( copyReport )
 
 
     },[report] )
@@ -26,6 +26,7 @@ const EditStudentReport = () => {
         await updateReport( studentId,reportId,{ title: editedReport.title,content: editedReport.content } )
         navigate( -1 )
     }
+
 
     return (
 
@@ -38,7 +39,7 @@ const EditStudentReport = () => {
                 <Input
                     label='Titulo do relatório:'
                     width='w-[25rem]'
-                    value={editedReport?.title}
+                    value={editedReport?.title || ''}
                     name='title'
                     onChange={( e ) => setEditedReport( { ...editedReport,title: e.target.value } )}
                 />
@@ -47,7 +48,7 @@ const EditStudentReport = () => {
                     Relatório:
                     <textarea
                         className='border h-[50vh] outline-none text-sm p-1'
-                        value={editedReport?.content}
+                        value={editedReport?.content || ''}
                         name='content'
                         onChange={( e ) => setEditedReport( { ...editedReport,content: e.target.value } )}
                     />

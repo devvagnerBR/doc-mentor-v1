@@ -6,13 +6,9 @@ import { TrashSimple } from '@phosphor-icons/react'
 import { Plus } from '@phosphor-icons/react'
 import useGetStudents from '../../../hooks/useGetStudents';
 import useStudent from '../../../hooks/useStudent';
-import { StudentContext } from '../../../context/studentsContext';
-
 
 
 const MyStudents = () => {
-
-
 
     const navigate = useNavigate()
     const { students } = useGetStudents()
@@ -28,7 +24,6 @@ const MyStudents = () => {
     const handleStudentDetails = ( student ) => {
         navigate( student.id )
     }
-
 
 
     return (
@@ -110,7 +105,6 @@ const MyStudents = () => {
                             } )}
 
                         </div>
-
                     </>}
             </main>
 

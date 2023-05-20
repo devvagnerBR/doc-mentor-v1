@@ -15,7 +15,11 @@ const StudentReport = () => {
 
 
     const handleGeneratePDF = async () => {
-        await useGeneratePDF( student.name,student.school_name,report.title,report.content,report.report_date )
+        await useGeneratePDF(
+            student.name,
+            student.school_name,
+            report.title,report.content,
+            report.report_date )
     }
 
     if ( report )
@@ -48,7 +52,7 @@ const StudentReport = () => {
 
                 <div className='flex mt-4 p-3  flex-wrap flex-col'>
                     <h1>Relatório:</h1>
-                    <p className='break-all text-neutral-600  text-sm'>{report?.content}</p>
+                    <div className='focus:bg-red-200' style={{ whiteSpace: "pre-line" }}>{report?.content}</div>
                 </div>
             </div>
         )
