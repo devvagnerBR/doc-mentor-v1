@@ -1,15 +1,14 @@
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
+pdfMake.vfs = pdfFonts && pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : globalThis.pdfMake.vfs;
 
 import moment from 'moment';
 import 'moment/dist/locale//pt-br';
 
 const useGeneratePDF = async ( studentName,schoolName,title,content,reportDate ) => {
-    
-    
-    
+
+
 
     const docDefinition = {
 
@@ -54,7 +53,7 @@ const useGeneratePDF = async ( studentName,schoolName,title,content,reportDate )
     }
 
 
-     pdfMake.createPdf( docDefinition ).open()
+    pdfMake.createPdf( docDefinition ).open()
 
 }
 
