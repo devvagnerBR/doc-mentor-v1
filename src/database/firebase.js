@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app'
 import { getDatabase } from 'firebase/database'
 //firebase Auth
 import { getAuth } from 'firebase/auth'
-
+import { getStorage } from 'firebase/storage';
 
 //MODULAR
 
@@ -26,3 +26,4 @@ const firebaseConfig = {
 const app = initializeApp( firebaseConfig );
 export const auth = getAuth( app );
 export const db = getDatabase( app );
+export const storage = getStorage(app);

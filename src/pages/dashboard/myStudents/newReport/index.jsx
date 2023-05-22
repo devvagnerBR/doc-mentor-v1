@@ -50,14 +50,14 @@ const NewReport = () => {
         <div className='w-full h-full flex flex-col'>
             <header className='w-full flex h-25 justify-start items-start p-3 shrink-0 flex-col'>
                 <div className='flex items-end justify-center gap-2'>
-                    <h1 className='text-2xl font-Saira font-medium'>{ }</h1>
+                    <h1 className='text-2xl font-Saira font-medium'>{student?.name}</h1>
                     <div>
                         <h1 className=' font-Saira underline  text-amber-400 cursor-pointer'>editar aluno</h1>
                     </div>
                 </div>
 
-                <div className='flex gap-3'>
-                    <h2 className='text-neutral-500'>Escola: <span className='text-neutral-700'>{student?.name}</span></h2>
+                <div className='flex gap-3 '>
+                    <h2 className='text-neutral-500'>Escola: <span className='text-neutral-700'>{student?.school_name}</span></h2>
                     <h2 className='text-neutral-500'>Turma: <span className='text-neutral-700'>{student?.class_name}</span></h2>
                     <h2 className='text-neutral-500'>Turno: <span className='text-neutral-700'>{student?.shift}</span></h2>
                 </div>
