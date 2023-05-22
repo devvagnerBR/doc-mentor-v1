@@ -3,9 +3,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import 'moment/dist/locale/pt-br';
+import useStudent from '../../../../../hooks/useStudent';
 
 const Reports = ( { reports } ) => {
 
+    const { deleteReport } = useStudent()
+
+    const handleDeleteReport = async ( report ) => {
+        if ( window.confirm( 'Deseja mesmo excluir esse relatório?' ) ) {
+            await deleteReport( report.id,studentId )
+        }
+    }
+
+    
     return (
         <main className='w-full h-full flex justify-start items-start gap-8 px-4'>
             {reports.length === 0 ? 'Ainda não foi registrado nenhum relatório' :

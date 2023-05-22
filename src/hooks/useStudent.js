@@ -3,12 +3,14 @@ import React from 'react'
 import { db } from '../database/firebase';
 import { v4 as IdGenerator } from 'uuid'
 import { AuthContext } from '../context/authContext';
+import { useParams } from 'react-router-dom';
 
 
 
 const useStudent = () => {
 
   const teacher = React.useContext( AuthContext )
+  const { studentId } = useParams()
   const addNewStudent = async ( body,teacherId ) => {
 
     if ( Object.keys( body ).length === 0 ) return false;
@@ -49,7 +51,18 @@ const useStudent = () => {
       .then( () => console.log( 'relatório atualizados com sucesso' ) )
   }
 
-  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent,deleteReport,updateReport }
+
+  const markFileAsRemoved = async ( fileId ) => {
+
+    if ( window.confirm( 'Deseja realmente excluir esse arquivo?' ) ) {
+      update( ref( db,`teachers/${teacher.id}/students/${studentId}/files/${fileId}` ),{ active: false } )
+        .then( () => console.log( 'Arquivo marcado como inativo' ) )
+
+    }
+
+  }
+
+  return { addNewStudent,maskStudentAsInactive,addNewReport,updateStudent,deleteReport,updateReport,markFileAsRemoved }
 }
 
 export default useStudent

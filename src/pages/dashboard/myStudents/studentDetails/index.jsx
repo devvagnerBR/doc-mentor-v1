@@ -14,18 +14,11 @@ const StudentDetails = () => {
 
 
     const { studentId } = useParams()
-    const { deleteReport } = useStudent()
     const { reports } = useGetReports()
-
     const { student } = useGetStudentById( studentId )
 
+    
 
-    const handleDeleteReport = async ( report ) => {
-
-        if ( window.confirm( 'Deseja mesmo excluir esse relatório?' ) ) {
-            await deleteReport( report.id,studentId )
-        }
-    }
 
 
     return (

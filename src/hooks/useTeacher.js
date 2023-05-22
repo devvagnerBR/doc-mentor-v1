@@ -1,17 +1,18 @@
 import React from 'react'
 import { auth,db } from '../database/firebase'
-import { ref,update, } from 'firebase/database';
+import { ref,update,} from 'firebase/database';
 import { GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import 'moment/dist/locale/pt-br';
 
 
 const useTeacher = () => {
 
-
     const navigate = useNavigate()
     const [teacher,setTeacher] = React.useState( [] )
     const provider = new GoogleAuthProvider;
+
+
 
     const checkForUpdate = async () => {
 
@@ -22,7 +23,7 @@ const useTeacher = () => {
                 if ( !displayName,!photoURL ) {
                     throw new Error( 'Missing information from Google Account' )
                 }
-                await updateData( ( `teachers/${uid}/infos/` ),{ id: uid,name: displayName,avatar: photoURL,email: email} )
+                await updateData( ( `teachers/${uid}/infos/` ),{ id: uid,name: displayName,avatar: photoURL,email: email } )
                 setTeacher( { id: uid,name: displayName,avatar: photoURL,email: email } )
 
             }
@@ -35,7 +36,7 @@ const useTeacher = () => {
         const updates = {}
         updates[path] = body
         return await update( ref( db ),updates )
-       
+
 
 
     }
@@ -64,7 +65,8 @@ const useTeacher = () => {
         } )
     }
 
-    return { checkForUpdate,sigInWithGoogle,teacher,updateData,logOut }
+
+    return { checkForUpdate,sigInWithGoogle,teacher,updateData,logOut, }
 }
 
 export default useTeacher

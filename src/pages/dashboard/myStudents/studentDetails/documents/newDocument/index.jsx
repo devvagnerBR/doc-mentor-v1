@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate,useParams } from 'react-router-dom'
 import useGetStudentById from '../../../../../../hooks/useGetStudentById'
 import Input from './../../../../../../components/input/index';
 import useStorage from '../../../../../../hooks/useStorage';
@@ -12,7 +12,7 @@ const initialValues = {
 }
 const NewDocument = () => {
 
-
+    const navigate = useNavigate()
     const { studentId } = useParams()
     const { student } = useGetStudentById( studentId )
     const [fields,setFields] = React.useState( initialValues )
@@ -34,13 +34,16 @@ const NewDocument = () => {
             const body = {
                 file_name: fields.file_name,
                 file_date: Date.now(),
-                file: url
+                file: url,
+                active: true
             }
 
             await saveImageAsURL( body )
 
         } catch ( error ) {
             console.log( error );
+        } finally {
+            navigate( -1 )
         }
 
     }
